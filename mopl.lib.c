@@ -25,50 +25,56 @@ MNumber MInit(uint64_t integerFigures, uint64_t decimalFigures, bool positive)
 
 int c2i(char c)
 {
-    if (c == '0')
-        return 0;
-    else if (c == '1')
-        return 1;
-    else if (c == '2')
-        return 2;
-    else if (c == '3')
-        return 3;
-    else if (c == '4')
-        return 4;
-    else if (c == '5')
-        return 5;
-    else if (c == '6')
-        return 6;
-    else if (c == '7')
-        return 7;
-    else if (c == '8')
-        return 8;
-    else if (c == '9')
-        return 9;
+     switch((int) c){  
+        case '0':
+            return 0;  
+        case '1':
+            return 1;  
+        case '2':
+            return 2;  
+        case '3':
+            return 3;  
+        case '4':
+            return 4;  
+        case '5':
+            return 5;  
+        case '6':
+            return 6;  
+        case '7':
+            return 7;  
+        case '8':
+            return 8;  
+        case '9':
+            return 9;
+     }
+     return 0;
 }
 
 char i2c(int i)
 {
-    if (i == 0)
-        return '0';
-    else if (i == 1)
-        return '1';
-    else if (i == 2)
-        return '2';
-    else if (i == 3)
-        return '3';
-    else if (i == 4)
-        return '4';
-    else if (i == 5)
-        return '5';
-    else if (i == 6)
-        return '6';
-    else if (i == 7)
-        return '7';
-    else if (i == 8)
-        return '8';
-    else if (i == 9)
-        return '9';
+     switch(i){  
+        case 0:
+            return '0';  
+        case 1:
+            return '1';  
+        case 2:
+            return '2';  
+        case 3:
+            return '3';  
+        case 4:
+            return '4';  
+        case 5:
+            return '5';  
+        case 6:
+            return '6';  
+        case 7:
+            return '7';  
+        case 8:
+            return '8';  
+        case 9:
+            return '9';
+     }
+     return '0';
 }
 
 MNumber MAdd(MNumber a, MNumber b)
