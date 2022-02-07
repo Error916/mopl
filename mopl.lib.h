@@ -30,7 +30,6 @@ MNumber MMultiplicate(MNumber a, MNumber b);
 MNumber MDivide(MNumber a, MNumber b);
 MNumber MModulo(MNumber a, MNumber b);
 MNumber MIntegerDivision(MNumber a, MNumber b);
-MNumber MIntegerDivision(MNumber a, MNumber b);
 MNumber MAbsolute(MNumber a);
 int MCompare(MNumber a, MNumber b);
 int c2i(char c);
