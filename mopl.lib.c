@@ -106,19 +106,19 @@ MNumber MAdd(MNumber a, MNumber b)
     c.integerFigures = imax.integerFigures;
     c.decimalFigures = dmax.decimalFigures;
     int sum = 0, ci, tis;
-    for (int i = 0; i < imax.integerFigures; i++)
+    for (int i = 0; i < MOPL_ALLOC_INT; i++)
     {
         ci = MOPL_ALLOC_INT - i;
         if (i > imin.integerFigures)
         {
-            tis = imax.mantissaInt[ci] + icarry;
-            c.mantissaInt[ci] = tis % 10;
+            tis = c2i(imax.mantissaInt[ci]) + icarry;
+            c.mantissaInt[ci] = i2c(tis % 10);
             icarry = tis - 10;
         }
         else
         {
-            sum = i2c(imax.mantissaInt[ci]) + i2c(imin.mantissaInt[ci]) + icarry;
-            c.integerFigures[ci] = sum % 10;
+            sum = c2i(imax.mantissaInt[ci]) + c2i(imin.mantissaInt[ci]) + icarry;
+            c.integerFigures[ci] = i2c(sum % 10);
             if (sum > 10)
             {
                 icarry = sum - 10;
@@ -128,8 +128,47 @@ MNumber MAdd(MNumber a, MNumber b)
     if (icarry) c.error = true;
     return c;
 }
+MNumber MSubtract(MNumber a, MNumber b){
+    b.positive = !positive;
+    return MNAdd(a,b);
+}
 MNumber MAbsolute(MNumber a)
 {
     a.positive = true;
     return a;
+}
+int MCompare(MNumber a, MNumber b) {
+     if(a.positive != b.positive)
+          if(a.positive) return 1;
+          return -1;
+     }
+     for(int i = 0; i < MOPL_ALLOC_INT; i++){
+         if(a.integerFigures < MOPL_ALLOC_INT - i && b.integerFigures >=  MOPL_ALLOC_INT - i && c2i(b.mantissaInt[i]) != 0){
+             if(b.positive) return -1;
+             return 1;
+         }
+         if(b.integerFigues < MOPL_ALLOC_INT && a.integerFigures >= MOPL_ALLOC_INT - i && c2i(a.mantissaInt[i]) != 0){
+            if(a.positive) return 1;
+            return -1;
+         }
+         if(c2i(a.mantissaInt[i]) < c2i(b.mantissaInt[i])){
+             if(a.positive) return -1;
+             return 1;
+         }
+         if(c2i(a.mantissaInt[i]) > c2i(b.mantissaInt[i])){
+             if(a.positive) return 1;
+            return -1;
+         }
+    }
+    for(int i = 0; i < MOPL_ALLOC_DEC; i++){
+        if(c2i(a.mantissaDec[i]) < c2i(b.mantissaDec[i])){
+            if(a.positive)  return -1;
+            return 1;
+        }
+        if(c2i(a.mantissaDec[i]) > c2i(b.mantissaDec[i])){
+            if(a.positive) return 1;
+            return -1;
+        }
+    }
+    return 0;
 }

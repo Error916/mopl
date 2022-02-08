@@ -24,7 +24,6 @@ typedef struct MNumber
 
 MNumber MInit(uint64_t integerFigures, uint64_t decimalFigures);
 MNumber MAdd(MNumber a, MNumber b);
-MNumber MAdd(MNumber a, MNumber b);
 MNumber MSubtract(MNumber a, MNumber b);
 MNumber MExponent(MNumber a, MNumber b);
 MNumber MMultiplicate(MNumber a, MNumber b);
