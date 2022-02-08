@@ -105,7 +105,7 @@ MNumber MAdd(MNumber a, MNumber b)
     }
     c.integerFigures = imax.integerFigures;
     c.decimalFigures = dmax.decimalFigures;
-    int sum = 0, ci, tis;
+    int sum = 0, ci, tis, ia, ib;
     for (int i = 0; i < MOPL_ALLOC_INT; i++)
     {
         ci = MOPL_ALLOC_INT - i;
@@ -117,11 +117,18 @@ MNumber MAdd(MNumber a, MNumber b)
         }
         else
         {
-            sum = c2i(imax.mantissaInt[ci]) + c2i(imin.mantissaInt[ci]) + icarry;
+            ia = c2i(a.mantissaInt[ci]);
+            ib = c2i(b.mantissaInt[ci]);
+            if(!ia.positive) ia*=-1;
+            if(!ib.positive) ib*=-1;
+            sum = ia + ib + icarry;
             c.integerFigures[ci] = i2c(sum % 10);
             if (sum > 10)
             {
                 icarry = sum - 10;
+            }
+            else if(sum < 0){
+                icarry = sum + 10;
             }
         }
     }
