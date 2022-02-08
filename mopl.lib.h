@@ -10,20 +10,21 @@
 #endif
 
 #include <stdint.h>
-#include <stdbool.h>
+#include <string.h>
 typedef struct MNumber
 {
     // The numbers are stored as big endian
-    char mantissaInt[MOPL_ALLOC_INT];
-    char mantissaDec[MOPL_ALLOC_DEC];
+    unsigned char mantissaInt[MOPL_ALLOC_INT];
+    unsigned char mantissaDec[MOPL_ALLOC_DEC];
     uint64_t integerFigures;
     uint64_t decimalFigures;
-    bool positive;
-    bool error;
+    uint8_t positive;
+    uint8_t error;
 } MNumber;
 
-MNumber MInit(uint64_t integerFigures, uint64_t decimalFigures);
+MNumber MInit(uint64_t integerFigures, uint64_t decimalFigures, uint8_t positive);
 MNumber MAdd(MNumber a, MNumber b);
+MNumber MNAdd(MNumber a, MNumber b);
 MNumber MSubtract(MNumber a, MNumber b);
 MNumber MExponent(MNumber a, MNumber b);
 MNumber MMultiplicate(MNumber a, MNumber b);
