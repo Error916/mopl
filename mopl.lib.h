@@ -13,6 +13,7 @@
 #include <stdbool.h>
 typedef struct MNumber
 {
+    // The numbers are stored as big endian
     char mantissaInt[MOPL_ALLOC_INT];
     char mantissaDec[MOPL_ALLOC_DEC];
     uint64_t integerFigures;
